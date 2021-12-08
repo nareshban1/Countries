@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import { fetchCountries } from "../../utilities/api";
+import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
+import { Container } from "../../utilities/commonStyles";
 import {
   BackButton,
   CountryBorderContainer,
@@ -10,8 +12,10 @@ import {
   CountryData,
   CountryDetails,
   CountryFlag,
+  CountryFlagContainer,
   CountryInfo,
   CountryInfoContainer,
+  CountryInfoData,
   CountryInfoLeft,
   CountryInfoRight,
   CountryName,
@@ -19,6 +23,7 @@ import {
 } from "./DetailsStyle";
 const Details = () => {
   const params = useParams();
+  const navigate = useNavigate();
 
   const [country, setCountry] = useState([]);
   const getCountryData = (url) => {
@@ -42,45 +47,74 @@ const Details = () => {
 
   return (
     <DetailsContainer>
-      <BackButton></BackButton>
-      <CountryDetails>
-        <CountryFlag src={country[0]?.flags?.png} />
-        <CountryInfoContainer>
-          <CountryName>{country[0]?.name}</CountryName>
-          <CountryInfo>
-            <CountryInfoLeft>
-              <CountryData>Native Name:{country[0]?.nativeName}</CountryData>
-              <CountryData>
-                Population:{country[0]?.languages?.nativeName}
-              </CountryData>
-              <CountryData>Region:{country[0]?.region}</CountryData>
-              <CountryData>Sub Region:{country[0]?.subregion}</CountryData>
-              <CountryData>Capital:{country[0]?.capital}</CountryData>
-            </CountryInfoLeft>
-            <CountryInfoRight>
-              <CountryData>
-                Top Level Domain:{country[0]?.topLevelDomain}
-              </CountryData>
-              <CountryData>
-                Currencies:
-                {country[0]?.currencies?.map((currency, index) => (
-                  <>{currency.name}</>
-                ))}
-              </CountryData>
-              <CountryData>
-                Languages:
-                {country[0]?.languages?.map((language, index) => (
-                  <>{language.name}</>
-                ))}
-              </CountryData>
-            </CountryInfoRight>
-          </CountryInfo>
-          <CountryBorderContainer>
-            <CountryBorderTitle></CountryBorderTitle>
-            <CountryBorders></CountryBorders>
-          </CountryBorderContainer>
-        </CountryInfoContainer>
-      </CountryDetails>
+      <Container>
+        <BackButton onClick={() => navigate(-1)}>
+          <HiOutlineArrowNarrowLeft />
+          &nbsp; Back
+        </BackButton>
+        <CountryDetails>
+          <CountryFlagContainer>
+            <CountryFlag src={country[0]?.flags?.png} />
+          </CountryFlagContainer>
+          <CountryInfoContainer>
+            <CountryName>{country[0]?.name}</CountryName>
+            <CountryInfo>
+              <CountryInfoLeft>
+                <CountryData>
+                  Native Name: &nbsp;
+                  <CountryInfoData>{country[0]?.nativeName}</CountryInfoData>
+                </CountryData>
+                <CountryData>
+                  Population:&nbsp;
+                  <CountryInfoData>
+                    {country[0]?.languages?.nativeName}
+                  </CountryInfoData>
+                </CountryData>
+                <CountryData>
+                  Region:&nbsp;
+                  <CountryInfoData>{country[0]?.region}</CountryInfoData>
+                </CountryData>
+                <CountryData>
+                  Sub Region:&nbsp;
+                  <CountryInfoData>{country[0]?.subregion}</CountryInfoData>
+                </CountryData>
+                <CountryData>
+                  Capital:&nbsp;
+                  <CountryInfoData>{country[0]?.capital}</CountryInfoData>
+                </CountryData>
+              </CountryInfoLeft>
+              <CountryInfoRight>
+                <CountryData>
+                  Top Level Domain:&nbsp;
+                  <CountryInfoData>
+                    {country[0]?.topLevelDomain}
+                  </CountryInfoData>
+                </CountryData>
+                <CountryData>
+                  Currencies:&nbsp;
+                  <CountryInfoData>
+                    {country[0]?.currencies?.map((currency, index) => (
+                      <>{currency.name}</>
+                    ))}
+                  </CountryInfoData>
+                </CountryData>
+                <CountryData>
+                  Languages:&nbsp;
+                  <CountryInfoData>
+                    {country[0]?.languages?.map((language, index) => (
+                      <>{language.name}</>
+                    ))}
+                  </CountryInfoData>
+                </CountryData>
+              </CountryInfoRight>
+            </CountryInfo>
+            <CountryBorderContainer>
+              <CountryBorderTitle>Border Countries</CountryBorderTitle>
+              <CountryBorders></CountryBorders>
+            </CountryBorderContainer>
+          </CountryInfoContainer>
+        </CountryDetails>
+      </Container>
     </DetailsContainer>
   );
 };
