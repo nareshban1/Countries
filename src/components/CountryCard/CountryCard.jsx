@@ -10,21 +10,21 @@ import {
 
 const CountryCard = ({ name, image, population, region, capital }) => {
   return (
-    <CardContainer>
+    <CardContainer to={`/details/${name}`}>
       <FlagImage src={image} alt={name} />
       <CountryDetails>
         <CountryName>{name}</CountryName>
         <CountryInfo>
           <CountryInfoItem>
-            Population:
+            Population:&nbsp;
             <CountryInfoData>{population}</CountryInfoData>
           </CountryInfoItem>
           <CountryInfoItem>
-            Region:
+            Region:&nbsp;
             <CountryInfoData>{region}</CountryInfoData>
           </CountryInfoItem>
           <CountryInfoItem>
-            Capital:
+            Capital:&nbsp;
             <CountryInfoData>{capital}</CountryInfoData>
           </CountryInfoItem>
         </CountryInfo>

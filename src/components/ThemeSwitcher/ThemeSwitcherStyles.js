@@ -7,6 +7,9 @@ export const SwitcherContainer = styled.div`
     align-items: center;
     height: 100%;
     cursor: pointer;
+    @media only screen and (max-width:580px){
+        font-size: 0.8rem;
+    }
 `
 
 export const IconContainer = styled.div`

@@ -8,13 +8,12 @@ export const GlobalStyles = createGlobalStyle`
         text-decoration: none;
         list-style: none;
         box-sizing: border-box;
-       
         font-family: 'Nunito Sans', sans-serif;
+        transition: 100ms ease;
     }
     body{
         background: ${(props) => props.theme.mainBackground};
-       
+        transition: 100ms ease;
     }
+`;
 
-
-`
