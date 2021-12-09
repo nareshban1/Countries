@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -63,6 +64,8 @@ margin:10px 0px ;
 `
 export const CountryInfoData = styled.span`
 font-weight: 400;
+
+
 `
 export const CountryName = styled.h2`
 margin-top: 20px;
@@ -74,7 +77,28 @@ margin-top: 50px;
      
 }
 `
-export const CountryBorders = styled.div`
+
+export const BorderList = styled.div`
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+`
+export const CountryBorders = styled(Link)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgb(0 0 0 / 15%) 0px 0px 10px 0px; 
+    background: ${(props) => props.theme.secondaryBackground};
+    border: none;
+    padding: 5px 25px;
+    border-radius: 5px;
+    color: ${(props) => props.theme.textColorPrimary};
+    transition: 100ms ease;
+
+    &:hover{
+        transform: scale(1.05);
+    }
+
 `
 export const CountryBorderTitle = styled.div`
 font-weight: 600;

@@ -6,6 +6,7 @@ import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 import { Container } from "../../utilities/commonStyles";
 import {
   BackButton,
+  BorderList,
   CountryBorderContainer,
   CountryBorders,
   CountryBorderTitle,
@@ -26,9 +27,16 @@ const Details = () => {
   const navigate = useNavigate();
 
   const [country, setCountry] = useState([]);
+  const [neighbours, setNeighbours] = useState([]);
   const getCountryData = (url) => {
     fetchCountries(url).then((res) => {
       setCountry(res?.data);
+    });
+  };
+
+  const getNeighborData = (url) => {
+    fetchCountries(url).then((res) => {
+      setNeighbours(res?.data);
     });
   };
 
@@ -44,6 +52,25 @@ const Details = () => {
       mounted = false;
     };
   }, [params.name]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    let borders = [];
+    if (country[0]?.borders) {
+      console.log("hi");
+      for (const neighbour of country[0]?.borders) {
+        borders.push(neighbour);
+      }
+      if (mounted) {
+        getNeighborData(`https://restcountries.com/v2/alpha?codes=${borders}`);
+      }
+    }
+
+    return () => {
+      mounted = false;
+    };
+  }, [country]);
 
   return (
     <DetailsContainer>
@@ -94,7 +121,7 @@ const Details = () => {
                   Currencies:&nbsp;
                   <CountryInfoData>
                     {country[0]?.currencies?.map((currency, index) => (
-                      <>{currency.name}</>
+                      <>{(index ? ", " : "") + currency.name}</>
                     ))}
                   </CountryInfoData>
                 </CountryData>
@@ -102,16 +129,29 @@ const Details = () => {
                   Languages:&nbsp;
                   <CountryInfoData>
                     {country[0]?.languages?.map((language, index) => (
-                      <>{language.name}</>
+                      <>{(index ? ", " : "") + language.name}</>
                     ))}
                   </CountryInfoData>
                 </CountryData>
               </CountryInfoRight>
             </CountryInfo>
-            <CountryBorderContainer>
-              <CountryBorderTitle>Border Countries</CountryBorderTitle>
-              <CountryBorders></CountryBorders>
-            </CountryBorderContainer>
+            {neighbours.length ? (
+              <>
+                <CountryBorderContainer>
+                  <CountryBorderTitle>Border Countries</CountryBorderTitle>
+                  <BorderList>
+                    {neighbours?.map((neighbour, index) => (
+                      <CountryBorders
+                        to={`/details/${neighbour.name}`}
+                        key={index}
+                      >
+                        {neighbour.name}
+                      </CountryBorders>
+                    ))}
+                  </BorderList>
+                </CountryBorderContainer>
+              </>
+            ) : null}
           </CountryInfoContainer>
         </CountryDetails>
       </Container>

@@ -2,6 +2,7 @@ import axios from "axios";
 
 
 export const fetchCountries = async (url) => {
+    console.log(url)
     const CancelToken = axios.CancelToken;
     let cancel;
     let response = await axios.get(url, {
