@@ -9,8 +9,8 @@ export const HomePageContainer = styled.div`
 export const CountryGrid = styled.div`
     display:grid;
     grid-template-columns: repeat(4,1fr);
-    margin: 50px 0px;
-    grid-gap: 50px;
+    margin: 70px 0px;
+    grid-gap: 70px;
 
     @media only screen and (max-width:1280px){
         grid-template-columns: repeat(3,1fr);

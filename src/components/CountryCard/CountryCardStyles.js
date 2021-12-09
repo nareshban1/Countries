@@ -19,7 +19,7 @@ export const CardContainer = styled(Link)`
 `
 
 export const FlagImage = styled.img`
-height: 180px;
+height: 160px;
 width: 100%;
 `
 
@@ -39,7 +39,7 @@ font-size: 1rem;
 
 export const CountryInfoItem = styled.li`
 font-weight: 600;
-margin:10px 0px ;
+margin:5px 0px ;
 `
 
 export const CountryInfoData = styled.span`

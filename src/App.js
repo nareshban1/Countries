@@ -10,10 +10,12 @@ const App = () => {
     return (
         <ThemeProvider >
             <NavBar />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/details/:name" element={<Details />} />
-            </Routes>
+            <main>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/details/:name" element={<Details />} />
+                </Routes>
+            </main>
         </ThemeProvider>
     )
 }
