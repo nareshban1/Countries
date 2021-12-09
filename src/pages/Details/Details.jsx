@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import SearchForm from "../../components/SearchForm/SearchForm";
 import { fetchCountries } from "../../utilities/api";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 import { Container } from "../../utilities/commonStyles";
